@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
 　def index
-  　binding.pry
+  　# binding.pry
+   @article = "article"
 　end
 end
