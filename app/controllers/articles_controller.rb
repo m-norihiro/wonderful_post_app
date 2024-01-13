@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show ]
+  before_action :set_article, only: %i[ show edit update ]
 
   # GET /articles
   def index
@@ -12,7 +12,11 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
-    @article = Article.new
+    @article = SampleArticle.new
+  end
+
+  # GET /articles/1/edit
+  def edit
   end
 
   # POST /articles
@@ -23,6 +27,21 @@ class ArticlesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  # PATCH/PUT /articles/1
+  def update
+    if @article.update(article_params)
+      redirect_to @article, notice: "Article was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /articles/1
+  def destroy
+    @article.destroy
+    edirect_to articles_url, notice: "Article was successfully destroyed."
   end
 
   private
